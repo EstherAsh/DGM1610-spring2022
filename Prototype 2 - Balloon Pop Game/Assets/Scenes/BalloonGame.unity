@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 1007242670}
   - component: {fileID: 1007242669}
   m_Layer: 5
-  m_Name: scores text
+  m_Name: scoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,6 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23e57c3fc253124890182a322432c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 0
+  scoreText: {fileID: 1007242669}
 --- !u!4 &1130849916
 Transform:
   m_ObjectHideFlags: 0
@@ -662,6 +664,7 @@ MonoBehaviour:
   scoreToGive: 0
   clicksToPop: 3
   scaleToIncrease: 0.1
+  Scoremanager: {fileID: 0}
 --- !u!1 &1346164577 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8988326258958727854, guid: 244c2c98f997598459e2e4a31213c8cd, type: 3}
@@ -682,6 +685,7 @@ MonoBehaviour:
   scoreToGive: 0
   clicksToPop: 3
   scaleToIncrease: 0.1
+  Scoremanager: {fileID: 0}
 --- !u!1 &1439099213
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +819,7 @@ MonoBehaviour:
   scoreToGive: 0
   clicksToPop: 3
   scaleToIncrease: 0.1
+  Scoremanager: {fileID: 0}
 --- !u!1001 &3271275256809480228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -868,7 +873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3271275257677329703, guid: 47491b94e413a764e9bd8f5881efb466, type: 3}
       propertyPath: m_Name
-      value: red balloon
+      value: red_balloon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47491b94e413a764e9bd8f5881efb466, type: 3}
@@ -925,7 +930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994445699173439615, guid: 4725653613bc78e47accb2ae1a4e1e57, type: 3}
       propertyPath: m_Name
-      value: blue baloon
+      value: blue_balloon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4725653613bc78e47accb2ae1a4e1e57, type: 3}
@@ -982,7 +987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988326258958727854, guid: 244c2c98f997598459e2e4a31213c8cd, type: 3}
       propertyPath: m_Name
-      value: green baloon
+      value: green_balloon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 244c2c98f997598459e2e4a31213c8cd, type: 3}

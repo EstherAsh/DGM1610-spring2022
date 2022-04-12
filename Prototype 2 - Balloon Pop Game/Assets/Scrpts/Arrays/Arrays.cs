@@ -40,7 +40,7 @@ public class Arrays : MonoBehaviour
             print(FriendNames);
         }
         */
-        print ("Your inventory is as follows:");
+        /*print ("Your inventory is as follows:");
         foreach (string simpleinv in simpleinv)
         {
             
