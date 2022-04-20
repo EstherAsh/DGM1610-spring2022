@@ -6,7 +6,7 @@ public class EnemyPatrol : MonoBehaviour
 {
     public float speed;
     public float distance;
-    private bool moveRight = ture;
+    private bool moveRight = true;
 
     public Transform groundDetect;
 
@@ -24,14 +24,14 @@ public class EnemyPatrol : MonoBehaviour
         transform.Translate(Vector2.right * speed *Time.deltaTime);
 
         //start, end, how long
-        RaycastHit2D groundInfo = Physics2d.Raycast(groundDetect.position, Vector2.down, distance);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetect.position, Vector2.down, distance);
 
         if(groundInfo.collider == false)
         {
             if (moveRight == true)
             {
                 //flip enemy at edge to move left
-                transtorm.eulerAngles = new Vector3(0, -100, 0);
+                transform.eulerAngles = new Vector3(0, -100, 0);
                 moveRight = false;
             }
             else
