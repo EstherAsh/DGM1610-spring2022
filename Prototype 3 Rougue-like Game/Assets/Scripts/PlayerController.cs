@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header ("Player Health")]
+    public int curHP;//current health points
+    public int maxHP;//full HP, maximum Health points the player can have
     
+    /////---------------
+    
+    [Header ("Player Movement")]
     public float movespeed = 5.0f; // Speed of player movement
     private Rigidbody2D rb; //store refrenced 2d Rigidbody
     Vector2 movement; // store player XY position movement
-
-
-
+    Vector2 direction;
+    ///////-------------
+    [Header ("Player Combat")]
+    public float attackRange;
+    public float attackRate;
+    private float lastAttackTime;
+    public int Damage;
+    public LayerMask enemyLayer;
 
 
     // Start is called before the first frame update
@@ -26,7 +37,7 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal"); //Input for LR movement
         movement.y = Input.GetAxis("Vertical"); //Input for LR movement
         //reminder: pysics stuffs should be under fixed update, while update is fine for inputs
-
+        
     }
     void FixedUpdate() //set number of calls per frame
     {
@@ -34,5 +45,43 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement* movespeed*Time.deltaTime);
         //time.delta time uses seconds rather than frames, safe for all computers and graphics
 
+        UpdateDirection();
     }
+    void UpdateDirection()
+    {
+        Vector2 vel = new Vector2(movement.x,movement.y);
+        if (vel.magnitude != 0)
+        {
+            direction = vel;
+        }
+        rb.velocity = vel * movespeed;
+    }
+    void Attack()
+    {
+        lastAttackTime = Time.time;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position,direction,attackRange, enemyLayer);
+        //raycast using enemy layer
+        if(hit.collider != null)//if hit variable doesnt not hit something 
+        {
+            hit.collider.GetComponent<Enemy>()?.TakeDamage(Damage);
+            //runs  the ''take damage script'' in Enemy that was hit
+            //In hit collider, get the component enemy and run take damage.
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        curHP -= damage;
+        if (curHP <0 )
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player has died");
+    }
+
 }
