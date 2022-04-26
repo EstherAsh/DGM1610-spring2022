@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     ///////-------------
     [Header ("Player Combat")]
+    public int Damage;
     public float attackRange;
     public float attackRate;
     private float lastAttackTime;
-    public int Damage;
     public LayerMask enemyLayer;
 
 
@@ -38,6 +38,13 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxis("Vertical"); //Input for LR movement
         //reminder: pysics stuffs should be under fixed update, while update is fine for inputs
         
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (Time.time - lastAttackTime >= attackRate)
+            {
+                Attack();
+            }
+        }
     }
     void FixedUpdate() //set number of calls per frame
     {

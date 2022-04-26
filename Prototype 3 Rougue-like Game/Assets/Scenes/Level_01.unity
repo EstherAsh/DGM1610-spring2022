@@ -262,7 +262,7 @@ MonoBehaviour:
   movespeed: 5
   attackRange: 1
   attackRate: 1
-  Damage: 1
+  Damage: 5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHP: 5
-  maxHP: 0
+  maxHP: 5
   damage: 1
   attackRate: 1
   player: {fileID: 287126713}
