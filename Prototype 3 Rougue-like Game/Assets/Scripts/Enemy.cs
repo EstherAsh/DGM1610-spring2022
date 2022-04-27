@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime;
     public PlayerController player;
 
+    [Header("LootDrop")]
+    public Pickup lootDrop;
+
 
 
 
@@ -24,6 +27,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
      player = GameObject.Find("Player").GetComponent<PlayerController>();
+     
     }
 
     // Update is called once per frame
@@ -40,6 +44,7 @@ public class Enemy : MonoBehaviour
         if (curHP <0 )
         {
             Die();
+            LootDrop();
         }
     }
 
@@ -52,8 +57,12 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+
     }
 
-
+    void LootDrop()
+    {
+        Instantiate(lootDrop,transform.position, Quaternion.identity);
+    }
 
 }
