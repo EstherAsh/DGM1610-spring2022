@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public int currHP; //current health points
     public int maxHP; //HP at beginning/ HP when healed. cannot go above this HP value.
     //public HPBar hpBar;
-    
+    public Cargo cargoShip;
 
     [Header ("Player Movement")]
     public float startSpeed = 5.0f;
@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
     
     [Header("Combat")]
     public GameObject projectile;
-    public float sheildCooldown;
-    public GameObject sheild;
+    public float shieldCooldown;
+    public GameObject shield;
+    public bool shieldExist;
     public int playerDamage;
     public float shotDelay;
     public LayerMask enemyLayer;
@@ -35,10 +36,11 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currHP = maxHP;
+        cargoShip = GameObject.Find("SupplyShip").GetComponent<Cargo>();
         //hpBar.SetHealth(maxHP);//sets hp bar to full.
         shotDelay = 1;
         moveSpeed = startSpeed;
-        sheildCooldown = 15.0f;
+        shieldCooldown = 15.0f;
     }
 
     // Update is called once per frame
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxis("Vertical");//Input for up&down movement
 
         Fire();
-        Sheild();
+        Shield();
 
         //Boundary check
         if(transform.position.y >=upperBound)
@@ -84,22 +86,30 @@ public class PlayerController : MonoBehaviour
             shotDelay -= Time.deltaTime;
         }
     }
-    void Sheild()
+    void Shield()
     {
-        if(sheildCooldown <=0)
+        if(shieldCooldown <=0)
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                Instantiate(sheild,new Vector3(transform.position.x+1.0f,transform.position.y, -1),Quaternion.identity);
-                sheildCooldown = 15.0f;
+                shieldExist = true;
+                Instantiate(shield,new Vector3(transform.position.x+1.0f,transform.position.y, -1),Quaternion.identity);
+                shieldCooldown = 15.0f;
             }
         }
-        else
+        else if (shieldExist == false )
         {
-            sheildCooldown -= Time.deltaTime;
+
+            shieldCooldown -= Time.deltaTime;
         }
 
     }
+
+    public void ShieldBreak()
+    {
+        shieldExist = false;
+    }
+
     public void TakeDamage(int enemyDamage)
     {
         currHP -= enemyDamage;
@@ -112,15 +122,22 @@ public class PlayerController : MonoBehaviour
     }
     void Heal(int healAmt)
     {
-        if(currHP+healAmt >=maxHP)
+        if(currHP<= cargoShip.currHP)
         {
-            currHP=maxHP;
-            //turn green for a split second when pickup.
+            if(currHP+healAmt >=maxHP)
+            {
+                currHP=maxHP;
+                //turn green for a split second when pickup.
+            }
+            else
+            {
+                currHP+=healAmt;
+                //turn green for a split second when pickup.
+            }
         }
-        else
+        else if (cargoShip.currHP< currHP)
         {
-            currHP+=healAmt;
-            //turn green for a split second when pickup.
+            cargoShip.Heal(healAmt);
         }
         
     }

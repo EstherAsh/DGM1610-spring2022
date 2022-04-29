@@ -25,7 +25,7 @@ public class PlayerProjectile : MonoBehaviour
             DestroyProjectile();
         }
     }
-    
+
     void OnTriggerEnter2D(Collider2D other)//when collision happens
     {
         if(other.CompareTag("Enemy"))//checks if its an enemy

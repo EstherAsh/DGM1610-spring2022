@@ -1,12 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7878150093097536636
+--- !u!1001 &1500025638457105342
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 382244406, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
+      propertyPath: enemyProjectile
+      value: 
+      objectReference: {fileID: 6942482497871523711, guid: a87999674e15a60409e38ccd3c67b991, type: 3}
+    - target: {fileID: 5199153043661507962, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199153043661507962, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199153043661507962, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.91372555
+      objectReference: {fileID: 0}
     - target: {fileID: 6309508157404666644, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -25,11 +41,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309508157404666644, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6309508157404666644, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6309508157404666644, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -65,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113706393275953331, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}
       propertyPath: m_Name
-      value: EnemyType2
+      value: EnemyType2 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0889b57dae14ece4b9fde417fa16af9f, type: 3}

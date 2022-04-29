@@ -7,20 +7,29 @@ public class EnemyProjectile : MonoBehaviour
     public int speed=9;
     public Enemy enemy;
     public int damage;
+    private Transform cargo;
+    private Vector2 target;
     
-    // Start is called before the first frame update
     void Start()
     {
+        //when created get enemydamage from enemy script, assign it to this scripts 'damage'
+        // Additionally, get Cargoscript from supplyship and grab its position, and assign that to var 'target'
+
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         damage = enemy.enemyDamage;
+        cargo = GameObject.FindGameObjectWithTag("Cargo").GetComponent<Transform>();
+        target = new Vector2(cargo.position.x, cargo.position.y);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
-        transform.Translate(Vector2.left*speed*Time.deltaTime);//moves projectile right when spawned
+        transform.position =Vector2.MoveTowards(transform.position, target, speed*Time.deltaTime);
         if (transform.position.x <= -10)
+        {
+            DestroyProjectile();
+        }
+        else if ( transform.position.x == target.x && transform.position.y == target.y) //has projectile reached destination
         {
             DestroyProjectile();
         }
@@ -34,9 +43,17 @@ public class EnemyProjectile : MonoBehaviour
             //--have EXPLOSION 
             DestroyProjectile();
         }
-        else if(other.CompareTag("Sheild"))//checks if its sheild
+        else if(other.CompareTag("Shield"))//checks if its sheild
         {
-            //other.GetComponent<PlayerController>()?.TakeDamage(damage);
+            other.GetComponent<PlayerShield>()?.TakeHit(transform.position);
+            
+            //--have EXPLOSION 
+            DestroyProjectile();
+        }
+        else if(other.CompareTag("Cargo"))//checks if its the cargo ship
+        {
+            other.GetComponent<Cargo>()?.TakeDamage(damage);
+            
             //--have EXPLOSION 
             DestroyProjectile();
         }
