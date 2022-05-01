@@ -12,7 +12,7 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        damage = player.playerDamage;
+        damage = player.playerDamage;//pulls damage from player, and uses that to put in the damage function if enemy is hit.
     }
 
     // Update is called once per frame
@@ -30,8 +30,11 @@ public class PlayerProjectile : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))//checks if its an enemy
         {
-            other.GetComponent<Enemy>()?.TakeDamage(damage);
-            //--have EXPLOSION 
+            other.GetComponent<Enemy>()?.TakeDamage(damage);//runs takedamage in enemy script
+            DestroyProjectile();
+        }
+        else if (other.CompareTag("Pickup"))//check if pickup
+        {
             DestroyProjectile();
         }
     }

@@ -313,8 +313,9 @@ MonoBehaviour:
   maxHP: 2
   enemySpeed: 0
   enemyProjectile: {fileID: 6505044449884586891, guid: 8078089064ba8954a86306978483ebfc, type: 3}
-  enemyDamage: 3
+  enemyDamage: 2
   shotDelay: 0
+  target: {fileID: 0}
 --- !u!1 &8038559001484631108
 GameObject:
   m_ObjectHideFlags: 0

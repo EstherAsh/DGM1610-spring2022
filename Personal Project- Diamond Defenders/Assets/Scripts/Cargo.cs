@@ -6,7 +6,8 @@ public class Cargo : MonoBehaviour
 {  
     [Header("health")]
     public int maxHP; 
-    public int currHP; 
+    public int currHP;
+    private int startHP = 20;
     public int healAmt; 
     //HPBAR
     public float gradualHeal;
@@ -19,13 +20,13 @@ public class Cargo : MonoBehaviour
     public Vector2 startPoint;   
 
     [Header("Bounds")]
-    //bounds for the movements randomly generated target to move towards
     public float maxY;
     public float minY;   
     
     void Start()
     {
-        //'reset' currHP and waitTime, and creates a new target for random movement
+        //'reset' maxHP, currHP and waitTime, and creates a new target for random movement
+        maxHP = startHP;
         currHP=maxHP;   
         waitTime = startWaitTime;   
         startPoint = new Vector2(transform.position.x, Random.Range(minY,maxY));    

@@ -23,7 +23,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void Update()
     {
-        
+        //movement- movetowards target. if it passes -10, or it has reached its destination, destroy gameOBJ.
         transform.position =Vector2.MoveTowards(transform.position, target, speed*Time.deltaTime);
         if (transform.position.x <= -10)
         {
@@ -35,31 +35,27 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter2D(Collider2D other)//when collision happens
+    void OnTriggerEnter2D(Collider2D other)//when collision happens. runs 'Takedamage' function if its the cargo ship or the player, and runs 'takehit' if its a sheild.
     {
+        //after collision it gets destroyed.
         if(other.CompareTag("Player"))//checks if its an enemy
         {
             other.GetComponent<PlayerController>()?.TakeDamage(damage);
-            //--have EXPLOSION 
             DestroyProjectile();
         }
         else if(other.CompareTag("Shield"))//checks if its sheild
         {
             other.GetComponent<PlayerShield>()?.TakeHit(transform.position);
-            
-            //--have EXPLOSION 
             DestroyProjectile();
         }
         else if(other.CompareTag("Cargo"))//checks if its the cargo ship
         {
             other.GetComponent<Cargo>()?.TakeDamage(damage);
-            
-            //--have EXPLOSION 
             DestroyProjectile();
         }
 
     }
-    void DestroyProjectile()
+    public void DestroyProjectile()
     {
         Destroy(gameObject);
     }

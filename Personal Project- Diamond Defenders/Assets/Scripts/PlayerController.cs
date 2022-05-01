@@ -6,8 +6,9 @@ using System.Threading;
 public class PlayerController : MonoBehaviour
 {
     [Header("Health")]
-    public int currHP; //current health points
-    public int maxHP; //HP at beginning/ HP when healed. cannot go above this HP value.
+    public int currHP;
+    public int maxHP;
+    private int startHP =20;
     //public HPBar hpBar;
     public Cargo cargoShip;
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        maxHP = startHP;
         currHP = maxHP;
         cargoShip = GameObject.Find("SupplyShip").GetComponent<Cargo>();
         //hpBar.SetHealth(maxHP);//sets hp bar to full.
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    void Fire()
+    void Fire()//if shot delay is zero and left shift is pressed, instantiate a player projectile, and reset shot delay.
     {
         if(shotDelay <=0)
         {
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
             shotDelay -= Time.deltaTime;
         }
     }
-    void Shield()
+    void Shield()//When you press space and the sheildcooldown is 0, a sheild spawns
     {
         if(shieldCooldown <=0)
         {
@@ -105,34 +107,31 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ShieldBreak()
+    public void ShieldBreak()//when shield break, set exist to false
     {
         shieldExist = false;
     }
 
-    public void TakeDamage(int enemyDamage)
+    public void TakeDamage(int enemyDamage)//subtracts enemy damage(from enemy projectile) from current health, and checks if dead.
     {
         currHP -= enemyDamage;
-        //hpBar.SetHealth(currHP);//update health bar using current HP.
         if (currHP <0 )
         {
             Die();
         }
 
     }
-    void Heal(int healAmt)
+    public void Heal(int healAmt)//heals the player IF the players health is lower than the cargo ships. if not, heals the cargoship.
     {
         if(currHP<= cargoShip.currHP)
         {
             if(currHP+healAmt >=maxHP)
             {
                 currHP=maxHP;
-                //turn green for a split second when pickup.
             }
             else
             {
                 currHP+=healAmt;
-                //turn green for a split second when pickup.
             }
         }
         else if (cargoShip.currHP< currHP)
@@ -141,15 +140,10 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-    void SpeedBoost()
-    {
-        //do this later
-        
-        
-    }
+
     void Die()
     {
-        Debug.Log("You died!");
+        //Debug.Log("You died!");
         //OVERLAY BUTTONS: TRY AGAIN AND MAIN MENU
         //TRY AGAIN SIMPLY RUNS A FUNTION ON GAMEMANAGER CALLED RESET-- (sets all waves killed to 0; resets health and positions of all characters, and runs 'start' funtions of the player again.)
         //main menu sends you to the main menu.

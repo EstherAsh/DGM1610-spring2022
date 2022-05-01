@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Shield
+  - Cargo
+  - EnemyProj
+  - Projectile
+  - Pickup
+  - wavetype
   layers:
   - Default
   - TransparentFX
