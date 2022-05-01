@@ -71,7 +71,6 @@ public class Cargo : MonoBehaviour
         //Additionally, 'stun' them by setting wait time(interval between movements) to 5, and resetting gradual heal timer.
 
         currHP -= enemyDamage;
-        //hpBar.SetHealth(currHP);//update health bar using current HP.
         if (currHP <=0 )
         {
             Die();
@@ -89,19 +88,16 @@ public class Cargo : MonoBehaviour
         if(currHP+healAmt >=maxHP)
         {
             currHP=maxHP;
-            //turn green for a split second when pickup.
         }
         else
         {
             currHP+=healAmt;
-            //turn green for a split second when pickup.
         }
     }
 
     void Die()
     {
-        //Runs when currHP is 0. does a death anim and adds 1 to the gameover counter in Gamemanager to pull up UI to restart or mainmenu.
-
+        //Runs when currHP is 0
         Debug.Log("cargoship has died");
     }
 
